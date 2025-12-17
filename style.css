@@ -1,130 +1,66 @@
 :root {
-    /* Paleta Suave (Estilo Ghibli/Sensorial) */
     --bg-color: #FFFBE6;
     --text-color: #5D4037;
-    --card-bg: #FFFFFF;        
-    
-    /* Cores Botões */
     --btn-yellow: #FFECB3; --btn-yellow-text: #6D4C41;
     --btn-blue: #B3E5FC;   --btn-blue-text: #0277BD;
     --btn-green: #C8E6C9;  --btn-green-text: #2E7D32;
     --btn-orange: #FFE0B2; --btn-orange-text: #EF6C00;
-
     --shadow: 0 8px 16px rgba(93, 64, 55, 0.1);
-    --border-radius: 24px;
 }
 
-* {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-    -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    height: 100vh;
-    display: flex; justify-content: center; overflow: hidden;
-}
+body { background-color: var(--bg-color); height: 100vh; overflow: hidden; display: flex; justify-content: center; }
 
-section {
-    width: 100%; max-width: 480px; height: 100%;
-    position: relative; background-color: var(--bg-color);
-    display: flex; flex-direction: column;
-}
+section { width: 100%; max-width: 480px; height: 100%; position: absolute; background-color: var(--bg-color); display: flex; flex-direction: column; }
 
 .hidden { display: none !important; }
 
-/* Animação Suave */
-@keyframes popIn {
-    0% { transform: scale(0.95); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+/* CENTRALIZAÇÃO VERTICAL TOTAL */
+.vertical-center {
+    margin: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/* --- SPLASH SCREEN (Atualizado para Imagem Fixa) --- */
-#splash-screen { justify-content: center; align-items: center; }
+.login-header h1 { font-size: 2rem; color: var(--text-color); font-weight: 700; }
+.brand-name { font-size: 3.5rem; color: var(--btn-blue-text); font-weight: 900; display: block; margin-top: -10px; }
 
-/* Configuração da imagem do logo */
-.logo-splash { 
-    width: 150px; 
-    height: auto; 
-    margin-bottom: 24px; 
-    /* Se quiser que ela flutue levemente, descomente a linha abaixo */
-    /* animation: float 3s ease-in-out infinite; */
-}
+.logo-login { width: 140px; margin: 30px 0; }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
+.login-fields { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 15px; }
+.login-fields input { padding: 20px; border-radius: 20px; border: 2px solid #EEE; font-size: 1.1rem; outline: none; }
+.login-btn { background: var(--btn-yellow); color: var(--btn-yellow-text); padding: 20px; border-radius: 20px; border: none; font-weight: 900; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 #ecd186; }
 
-#splash-screen h1 { font-size: 2.5rem; color: var(--btn-blue-text); font-weight: 900; }
-.content { display: flex; flex-direction: column; align-items: center; }
+/* MENU E CARDS (PARA CORRIGIR A IMAGEM) */
+header { display: flex; justify-content: space-between; padding: 20px; align-items: center; }
+.logo-text { font-size: 1.8rem; font-weight: 900; color: var(--btn-blue-text); }
+.menu-btn { background: white; border: none; width: 45px; height: 45px; border-radius: 50%; box-shadow: var(--shadow); cursor: pointer; }
 
-/* --- HEADER e NAVEGAÇÃO --- */
-header, .sub-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px; margin-bottom: 10px;
-}
-.sub-header h2 { font-size: 1.4rem; color: var(--text-color); }
-.logo-text { font-size: 1.5rem; font-weight: 900; color: var(--btn-blue-text); }
-.menu-btn { background: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem; color: var(--text-color); box-shadow: var(--shadow); cursor: pointer; }
-
-.back-btn {
-    background: white; border: none; padding: 10px 20px;
-    border-radius: 20px; font-weight: 800; color: var(--btn-blue-text);
-    box-shadow: 0 4px 0 rgba(0,0,0,0.05); cursor: pointer;
-}
-.back-btn:active { transform: translateY(2px); box-shadow: none; }
-
-/* --- CONTEÚDO PRINCIPAL --- */
-main {
-    flex-grow: 1; padding: 0 20px; overflow-y: auto;
-    display: flex; flex-direction: column;
-    animation: popIn 0.4s ease-out;
-}
-
-/* Hero (Personagem) */
-.hero { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
-.bubble {
-    background: #FFF; padding: 15px 20px; border-radius: 20px; border-bottom-left-radius: 0;
-    font-weight: 700; box-shadow: var(--shadow); margin-bottom: 10px; text-align: center;
-    cursor: pointer;
-}
-.mascot { width: 140px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); cursor: pointer; transition: transform 0.1s; }
-.mascot:active { transform: scale(0.95); }
-
-/* Menu Grid */
-.grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-.card {
-    height: 120px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    border-radius: var(--border-radius); font-weight: 800; cursor: pointer;
-    box-shadow: 0 6px 0 rgba(0,0,0,0.05); border: 2px solid rgba(255,255,255,0.4);
-    transition: transform 0.1s;
+.grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+.card { 
+    height: 140px; border-radius: 25px; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; font-weight: 800; cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.05); transition: 0.1s;
 }
 .card:active { transform: translateY(4px); box-shadow: none; }
-.card .icon { font-size: 2.2rem; margin-bottom: 5px; }
+.card .icon { font-size: 2.5rem; margin-bottom: 8px; }
 
-/* Cores Cards */
-.yellow { background: var(--btn-yellow); color: var(--btn-yellow-text); }
-.blue { background: var(--btn-blue); color: var(--btn-blue-text); }
-.green { background: var(--btn-green); color: var(--btn-green-text); }
-.orange { background: var(--btn-orange); color: var(--btn-orange-text); }
+.yellow { background: var(--btn-yellow) !important; color: var(--btn-yellow-text); }
+.blue { background: var(--btn-blue) !important; color: var(--btn-blue-text); }
+.green { background: var(--btn-green) !important; color: var(--btn-green-text); }
+.orange { background: var(--btn-orange) !important; color: var(--btn-orange-text); }
 
-/* AAC Grid */
-.grid-aac { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-bottom: 20px; }
-.aac-btn {
-    background: #FFF; border: 2px solid var(--btn-blue); border-radius: 20px;
-    padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-weight: 700; color: var(--text-color); aspect-ratio: 1;
-    box-shadow: 0 5px 0 rgba(0,0,0,0.05); cursor: pointer;
-}
-.aac-btn:active { background: var(--btn-blue); color: #FFF; transform: translateY(4px); box-shadow: none; }
-.aac-icon { font-size: 2.5rem; margin-bottom: 5px; }
+.hero { display: flex; flex-direction: column; align-items: center; margin: 20px 0; }
+.bubble { background: white; padding: 15px 25px; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 10px; font-weight: 700; position: relative; }
+.mascot { width: 130px; cursor: pointer; }
 
-/* Footer */
-.footer-profiles { margin-top: auto; display: flex; justify-content: center; gap: 30px; padding: 20px 0; }
-.profile-item { display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; font-weight: 700; opacity: 0.8; }
-.avatar { background: #FFF; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 5px; box-shadow: var(--shadow); }
+.footer-profiles { margin-top: auto; padding: 20px; display: flex; justify-content: center; gap: 40px; }
+.profile-item { display: flex; flex-direction: column; align-items: center; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+.avatar { background: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: var(--shadow); margin-bottom: 5px; }
+
+.pulse { animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }

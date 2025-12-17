@@ -2,46 +2,52 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Falinha App</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <section id="splash-screen">
-        <div class="content">
-            <img src="girassol.png" alt="Logo Falinha" class="logo-splash">
-            <h1>Falinha</h1>
+    <section id="login-screen">
+        <div class="vertical-center">
+            <div class="login-header">
+                <h1>Bem-vindo ao</h1>
+                <span class="brand-name">Falinha</span>
+            </div>
+            <img src="girassol.png" alt="Logo" class="logo-login">
+            <div class="login-fields">
+                <input type="email" id="email" placeholder="E-mail">
+                <input type="password" id="password" placeholder="Senha">
+                <button class="login-btn" onclick="handleLogin()">Entrar</button>
+                <p id="error-message" class="error-text hidden">Dados incorretos!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="splash-screen" class="hidden">
+        <div class="vertical-center">
+            <img src="girassol.png" alt="Logo" class="logo-login pulse">
+            <h1 class="loading-text">Carregando...</h1>
         </div>
     </section>
 
     <section id="main-menu" class="hidden">
         <header>
             <span class="logo-text">Falinha</span>
-            <button class="menu-btn">☰</button>
+            <button class="menu-btn" onclick="logout()">🚪</button>
         </header>
-
         <main>
             <div class="hero">
-                <div class="bubble" onclick="tocarOla()">
-                    Olá, vamos brincar com as palavras?
-                </div>
-                
-                <img 
-                    src="girassol-feliz.png" 
-                    alt="Girassol Feliz" 
-                    class="mascot"
-                    onclick="tocarOla()"
-                >
+                <div class="bubble" onclick="tocarOla()">Olá, vamos brincar?</div>
+                <img src="girassol.png" alt="Mascote" class="mascot" onclick="tocarOla()">
             </div>
-
             <div class="grid-menu">
                 <div class="card yellow" onclick="openScreen('falar')">
                     <span class="icon">👄</span> <span>Falar</span>
                 </div>
                 <div class="card blue" onclick="openScreen('sons')">
-                    <span class="icon">🎶</span> <span>Sons & Música</span>
+                    <span class="icon">🎶</span> <span>Sons</span>
                 </div>
                 <div class="card green" onclick="openScreen('brincar')">
                     <span class="icon">🎮</span> <span>Brincar</span>
@@ -50,15 +56,14 @@
                     <span class="icon">📖</span> <span>Histórias</span>
                 </div>
             </div>
-
             <div class="footer-profiles">
                 <div class="profile-item">
                     <div class="avatar cloud">☁️</div>
                     <span>Matéus</span>
                 </div>
-                <div class="profile-item">
+                <div class="profile-item" onclick="logout()">
                     <div class="avatar parents">👨‍👩‍👧</div>
-                    <span>Pais & educadores</span>
+                    <span>Sair</span>
                 </div>
             </div>
         </main>
@@ -71,64 +76,8 @@
             <div style="width: 40px;"></div>
         </header>
         <main class="grid-aac">
-            <button class="aac-btn" onclick="falar('Eu quero água')">
-                <span class="aac-icon">💧</span> <span>Água</span>
-            </button>
-            <button class="aac-btn" onclick="falar('Eu estou com fome')">
-                <span class="aac-icon">🍎</span> <span>Comer</span>
-            </button>
-            <button class="aac-btn" onclick="falar('Eu quero ir ao banheiro')">
-                <span class="aac-icon">🚽</span> <span>Banheiro</span>
-            </button>
-            <button class="aac-btn" onclick="falar('Eu estou feliz')">
-                <span class="aac-icon">😊</span> <span>Feliz</span>
-            </button>
-            <button class="aac-btn" onclick="falar('Eu estou triste')">
-                <span class="aac-icon">😢</span> <span>Triste</span>
-            </button>
-            <button class="aac-btn" onclick="falar('Não quero')">
-                <span class="aac-icon">🚫</span> <span>Não</span>
-            </button>
-        </main>
-    </section>
-
-    <section id="screen-sons" class="hidden">
-        <header class="sub-header">
-            <button class="back-btn" onclick="goHome()">⬅ Voltar</button>
-            <h2>Sons & Música</h2>
-            <div style="width: 40px;"></div>
-        </header>
-        <main class="grid-menu">
-            <div class="card blue" onclick="tocarSom('piano')">
-                <span class="icon">🎹</span> <span>Piano</span>
-            </div>
-            <div class="card green" onclick="tocarSom('bateria')">
-                <span class="icon">🥁</span> <span>Bateria</span>
-            </div>
-        </main>
-    </section>
-
-    <section id="screen-brincar" class="hidden">
-        <header class="sub-header">
-            <button class="back-btn" onclick="goHome()">⬅ Voltar</button>
-            <h2>Vamos Brincar</h2>
-            <div style="width: 40px;"></div>
-        </header>
-        <main class="hero">
-            <div class="bubble">Jogo da Memória (Em breve)</div>
-            <span style="font-size: 4rem;">🧩</span>
-        </main>
-    </section>
-
-    <section id="screen-historias" class="hidden">
-        <header class="sub-header">
-            <button class="back-btn" onclick="goHome()">⬅ Voltar</button>
-            <h2>Histórias</h2>
-            <div style="width: 40px;"></div>
-        </header>
-        <main class="hero">
-            <div class="bubble">Era uma vez...</div>
-            <span style="font-size: 4rem;">📚</span>
+            <button class="aac-btn" onclick="falar('Água')">💧 <span>Água</span></button>
+            <button class="aac-btn" onclick="falar('Comer')">🍎 <span>Comer</span></button>
         </main>
     </section>
 

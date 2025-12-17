@@ -1,63 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Elementos
+  const loginScreen = document.getElementById("login-screen");
   const splashScreen = document.getElementById("splash-screen");
   const mainMenu = document.getElementById("main-menu");
 
-  const screens = {
-    falar: document.getElementById("screen-falar"),
-    sons: document.getElementById("screen-sons"),
-    brincar: document.getElementById("screen-brincar"),
-    historias: document.getElementById("screen-historias"),
-  };
+  const USER_TEST = "teste12@gmail.com";
+  const PASS_TEST = "05210654109";
 
-  // --- ÁUDIO PERSONALIZADO ---
-  const audioBoasVindas = new Audio("ola.mp3");
+  window.handleLogin = () => {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
 
-  // 2. Splash Screen Timer (3 segundos)
-  setTimeout(() => {
-    splashScreen.style.display = "none";
-    mainMenu.classList.remove("hidden");
-  }, 3000);
+    if (email === USER_TEST && pass === PASS_TEST) {
+      localStorage.setItem("falinha_logged", "true");
+      loginScreen.classList.add("hidden");
+      splashScreen.classList.remove("hidden");
 
-  // 3. Navegação
-  window.openScreen = (screenName) => {
-    mainMenu.classList.add("hidden");
-    if (screens[screenName]) {
-      screens[screenName].classList.remove("hidden");
+      setTimeout(() => {
+        splashScreen.classList.add("hidden");
+        mainMenu.classList.remove("hidden");
+      }, 2500);
+    } else {
+      document.getElementById("error-message").classList.remove("hidden");
     }
   };
 
+  window.logout = () => {
+    localStorage.removeItem("falinha_logged");
+    location.reload();
+  };
+
+  if (localStorage.getItem("falinha_logged") === "true") {
+    loginScreen.classList.add("hidden");
+    mainMenu.classList.remove("hidden");
+  }
+
+  window.openScreen = (id) => {
+    mainMenu.classList.add("hidden");
+    document.getElementById(`screen-${id}`).classList.remove("hidden");
+  };
+
   window.goHome = () => {
-    Object.values(screens).forEach((screen) => {
-      screen.classList.add("hidden");
+    document.querySelectorAll("section").forEach((s) => {
+      if (s.id !== "main-menu") s.classList.add("hidden");
     });
     mainMenu.classList.remove("hidden");
   };
 
-  // 4. FUNÇÃO 1: TOCAR ÁUDIO GRAVADO (Girassol)
-  window.tocarOla = () => {
+  window.falar = (msg) => {
     window.speechSynthesis.cancel();
-    audioBoasVindas.pause();
-    audioBoasVindas.currentTime = 0;
-    audioBoasVindas.play();
+    const u = new SpeechSynthesisUtterance(msg);
+    u.lang = "pt-BR";
+    window.speechSynthesis.speak(u);
   };
 
-  // 5. FUNÇÃO 2: VOZ SINTÉTICA (Botões AAC)
-  window.falar = (texto) => {
-    audioBoasVindas.pause();
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(texto);
-    utterance.lang = "pt-BR";
-    utterance.rate = 1.0;
-    utterance.pitch = 1.4;
-
-    window.speechSynthesis.speak(utterance);
-  };
-
-  // 6. Sons (Placeholder)
-  window.tocarSom = (tipo) => {
-    console.log("Som: " + tipo);
-    alert("🎵 Imagine o som de: " + tipo);
-  };
+  window.tocarOla = () => falar("Olá, vamos brincar?");
 });
